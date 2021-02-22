@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Player : MonoBehaviour
 {
@@ -19,8 +20,16 @@ public class Player : MonoBehaviour
     [SerializeField]
     float invulnSeconds = 1;
     [SerializeField]
+    AudioSource audioSource;
+    [SerializeField]
     AudioClip hurtSoundEffect;
+    [SerializeField]
+    AudioClip victorySoundEffect;
     bool isInvulnerable;
+    [SerializeField]
+    GameObject lossScreen;
+    [SerializeField]
+    GameObject winScreen;
     
     void Awake()
     {
@@ -89,14 +98,33 @@ public class Player : MonoBehaviour
             if (!isInvulnerable)
             {
                 hp--;
-                AudioSource.PlayClipAtPoint(hurtSoundEffect, new Vector3(0, 0, 0));
+                AudioSource.PlayClipAtPoint(hurtSoundEffect, transform.position);
 
                 if (hp <= 0)
                 {
+                    moveSpeed = 0f;
+                    lossScreen.SetActive(true);
+                    BecomeInvulnerableForSeconds(5f);
+                    StartCoroutine(RestartSceneAfterSeconds(4f));
                     return;
                 }
             }
         }
+
+        else if (other.CompareTag("Cat"))
+        {
+            audioSource.Stop();
+            AudioSource.PlayClipAtPoint(victorySoundEffect, transform.position);
+            winScreen.SetActive(true);
+            moveSpeed = 0f;
+            StartCoroutine(RestartSceneAfterSeconds(15f));
+        }
+    }
+
+    IEnumerator RestartSceneAfterSeconds(float seconds)
+    {
+        yield return new WaitForSeconds(seconds);
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 
     public void HealPlayer()

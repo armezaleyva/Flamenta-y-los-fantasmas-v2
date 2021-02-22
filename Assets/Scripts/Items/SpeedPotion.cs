@@ -13,7 +13,8 @@ public class SpeedPotion : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D other) {
         if (other.CompareTag("Player"))
         {
-            potion.Drink();
+            Player player = other.GetComponent<Player>();
+            potion.Drink(player);
             Destroy(gameObject);
 
             other.GetComponent<Player>().SpeedBoostForSeconds(speedSeconds, speedBoost);

@@ -7,8 +7,9 @@ public class Potion : Item
 {
     [SerializeField]
     AudioClip soundEffect;
-    public void Drink()
+    public void Drink(Player player)
     {
-        AudioSource.PlayClipAtPoint(soundEffect, new Vector3(0, 0, 0));
+        Vector3 playerPosition = player.transform.position;
+        AudioSource.PlayClipAtPoint(soundEffect, playerPosition, 1f);
     }
 }
