@@ -6,7 +6,7 @@ public class Ghost : MonoBehaviour
 {
     [SerializeField]
     float speed = 6;
-    float distance = 5;
+    float distance = 2;
     bool isMovingRight;
     [SerializeField]
     Transform groundDetection;
