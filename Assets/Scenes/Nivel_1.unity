@@ -303,6 +303,7 @@ MonoBehaviour:
   audioSource: {fileID: 262577014}
   hurtSoundEffect: {fileID: 8300000, guid: 9fbff9982eafdaf43b988ab765290fab, type: 3}
   victorySoundEffect: {fileID: 8300000, guid: 89e63bb601fc569489e3764c07e2d711, type: 3}
+  defeatSoundEffect: {fileID: 8300000, guid: a3e2edd7f84ff6e48901d6dc05ceaeb7, type: 3}
   lossScreen: {fileID: 962194263}
   winScreen: {fileID: 102021752}
 --- !u!50 &107447113

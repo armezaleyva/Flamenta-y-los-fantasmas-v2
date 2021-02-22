@@ -25,6 +25,8 @@ public class Player : MonoBehaviour
     AudioClip hurtSoundEffect;
     [SerializeField]
     AudioClip victorySoundEffect;
+    [SerializeField]
+    AudioClip defeatSoundEffect;
     bool isInvulnerable;
     [SerializeField]
     GameObject lossScreen;
@@ -104,8 +106,10 @@ public class Player : MonoBehaviour
                 {
                     moveSpeed = 0f;
                     lossScreen.SetActive(true);
-                    BecomeInvulnerableForSeconds(5f);
-                    StartCoroutine(RestartSceneAfterSeconds(4f));
+                    audioSource.Stop();
+                    AudioSource.PlayClipAtPoint(defeatSoundEffect, transform.position);
+                    BecomeInvulnerableForSeconds(15f);
+                    StartCoroutine(RestartSceneAfterSeconds(14f));
                     return;
                 }
             }
